@@ -1,0 +1,218 @@
+﻿<Window x:Class="Tea.Page.DescriptionProduct"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Tea.Page"
+        mc:Ignorable="d"
+        Title="DescriptionProduct" 
+        Height="650" Width="1000"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        Icon="/Image/Logo.png">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1.2*"/>
+            <RowDefinition Height="7*"/>
+        </Grid.RowDefinitions>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Orientation="Horizontal">
+                <Image Source="/Image/Logo.png"
+                       Width="80"
+                       Margin="20 0 10 0"/>
+                <TextBlock 
+                    Text="TeaTime"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontSize="30"
+                    FontFamily="Harrington"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal"
+                        Grid.Column="1"
+                        HorizontalAlignment="Center">
+                <Button
+                    x:Name="Btn_List_Product"
+                    Content="СПИСОК ТОВАРОВ"
+                    FontSize="14"
+                    Width="170" Height="35" 
+                    Background="#FFD3B77F"
+                    Opacity="1"
+                    Margin="0 0 20 0"/>
+
+                <Button
+                    x:Name="Btn_Checkout"
+                    Content="ОФОРМИТЬ ПОКУПКУ"
+                    FontSize="14"
+                    Width="170" Height="35" 
+                    Background="#FFD3B77F"
+                    Opacity="1"/>
+            </StackPanel>
+
+            <Button
+                x:Name="Btn_Exit"
+                Click="Btn_Exit_Click"
+                Grid.Column="2"
+                Background="White"
+                BorderBrush="White"
+                Width="80"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Margin="20 0">
+                <Button.Content>
+                    <Image Source="/Image/Exit.png"/>
+                </Button.Content>
+            </Button>
+            
+        </Grid>
+        
+        <Border
+            Grid.Row="1"
+            Margin="0 0 0 50"
+            Background="#FFE5E5E5"
+            Width="900" Height="420">
+
+            <Border
+                Width="750" Height="390"
+                Background="White">
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <StackPanel Orientation="Vertical"
+                                Grid.Column="1">
+                        <TextBlock
+                            x:Name="Tb_Category"
+                            FontSize="18"
+                            Padding="30 30 0 0"
+                            Text="saddddddddd"/>
+
+                        <TextBlock
+                            x:Name="Tb_Name"
+                            FontSize="25"
+                            Padding="30 20 0 0"
+                            Text="saddddddddd"/>
+
+                        <TextBlock
+                            x:Name="Tb_Description"
+                            HorizontalAlignment="Left"
+                            TextWrapping="Wrap"
+                            MaxHeight="200" Width="420"
+                            FontSize="12"
+                            Padding="30 20 0 0"
+                            Text="saddddddddd"/>
+
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock
+                                FontSize="16"
+                                Padding="30 10 0 0"
+                                Text="В наличии:"/>
+
+                            <TextBlock
+                                x:Name="Tb_Quantity"
+                                FontSize="16"
+                                Padding="5 10 0 0"
+                                Text="saddddddddd"/>
+
+                            <TextBlock
+                                FontSize="16"
+                                Padding="5 10 0 0"
+                                Text="шт."/>
+                        </StackPanel>
+
+                        
+                        <Grid 
+                             Margin="30, 0, 40, 0"
+                             Width="430">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.6*"/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="0.4*"/>
+                                <ColumnDefinition Width="0.5*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock
+                                FontSize="18"
+                                Padding="0 10 0 0"
+                                Text="Артикул:"
+                                Grid.Column="0"/>
+
+                            <TextBlock
+                                x:Name="Tb_Articul"
+                                FontSize="18"
+                                Padding="5 10 0 0"
+                                Text="1"
+                                Grid.Column="1"/>
+
+                            <TextBlock
+                                x:Name="Tb_Price"
+                                FontSize="25"
+                                Text="price"
+                                Margin="0 0 5 0"
+                                Grid.Column="2"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"/>
+
+                            <TextBlock
+                                Text="P"
+                                VerticalAlignment="Center"
+                                FontSize="25"
+                                Grid.Column="3"/>
+                            <Button
+                                x:Name="Btn_Bascet"
+                                Click="Btn_Bascet_Click"
+                                Background="White"
+                                BorderBrush="Black"
+                                Width="60" 
+                                Height="60"
+                                Margin="0"
+                                Grid.Column="4">
+                                <Button.Resources>
+                                    <Style TargetType="{x:Type Border}" >
+                                        <Setter Property="CornerRadius" Value="7"/>
+                                    </Style>
+                                </Button.Resources>
+                                <Image Source="/Image/Bascet.png" 
+                                            Width="40" Height="40"/>
+                            </Button>
+                        </Grid>
+                    </StackPanel>
+
+                        <Image
+                            x:Name="pathProduct"
+                            Grid.Column="0"
+                            Source="/Image/LogIn.png"
+                            Margin="10">
+
+                        </Image>
+                </Grid>
+            </Border>
+        </Border>
+        
+
+        <Button
+            x:Name="Btn_Back"
+            Click="Btn_Back_Click"
+            Grid.Row="1"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom"
+            Margin="0 0 45 30"
+            Content="НАЗАД"
+            FontSize="14"
+            Width="140" Height="35" 
+            Background="#FFD3B77F"
+            Opacity="1"/>
+    </Grid>
+
+</Window>

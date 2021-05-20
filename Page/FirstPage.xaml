@@ -1,0 +1,184 @@
+﻿<Window x:Class="Tea.Page.FirstPage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Tea.Page"
+        mc:Ignorable="d"
+        Title="FirstPage" 
+        Height="650" Width="1000"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        Icon="/Image/Logo.png">
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1.2*"/>
+            <RowDefinition Height="7*"/>
+        </Grid.RowDefinitions>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Orientation="Horizontal">
+                <Image Source="/Image/Logo.png"
+                       Width="80"
+                       Margin="20 0 10 0"/>
+                <TextBlock 
+                    Text="TeaTime"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontSize="30"
+                    FontFamily="Harrington"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal"
+                        Grid.Column="1"
+                        HorizontalAlignment="Center">
+                <Button
+                    x:Name="Btn_List_Product"
+                    Click="Btn_List_Product_Click"
+                    Content="СПИСОК ТОВАРОВ"
+                    FontSize="14"
+                    Width="170" Height="35" 
+                    Background="#FFD3B77F"
+                    Opacity="1"
+                    Margin="0 0 20 0"/>
+
+                <Button
+                    x:Name="Btn_Checkout"
+                    Content="ОФОРМИТЬ ПОКУПКУ"
+                    FontSize="14"
+                    Width="170" Height="35" 
+                    Background="#FFD3B77F"
+                    Opacity="1"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal"
+                        Grid.Column="2">
+                <TextBlock 
+                    x:Name="TB_FIN"
+                    Text=""
+                    Padding="10 0"
+                    Grid.Column="2"
+                    FontSize="14"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"/>
+            </StackPanel>
+            
+
+            <Button
+                x:Name="Btn_Exit"
+                Click="Btn_Exit_Click"
+                Grid.Column="2"
+                Background="White"
+                BorderBrush="White"
+                Width="80"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Margin="20 0">
+                <Button.Content>
+                    <Image Source="/Image/Exit.png"/>
+                </Button.Content>
+            </Button>
+        </Grid>
+        
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1.5*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1.5*"/>
+                </Grid.RowDefinitions>
+                
+                <StackPanel 
+                    Orientation="Vertical"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
+                
+                <TextBlock 
+                    Text="Чай из самых разных уголков мира"
+                    FontSize="20"/>
+
+                <!--<TextBlock
+                    FontSize="15">
+                    <LineBreak/>
+                    Более 230 позиций чая и более 100 видов кофе из разных уголков
+                    <LineBreak/>
+                    света. Более 80 позиций вкуснейших сладостей и десертов.
+                </TextBlock>-->
+
+                <TextBlock
+                    FontSize="15"
+                    Margin="0 0 0 20">
+                    <LineBreak/>
+                    Компания работает только с надежными поставщиками. Большая
+                    <LineBreak/>
+                    часть продукции производится специально для «TeaTime» и не
+                    <LineBreak/>
+                    представлена в других торговых сетях, что является гордостью
+                    <LineBreak/>
+                    всех сотрудников.
+                </TextBlock>
+            </StackPanel>
+
+                <StackPanel 
+                    Orientation="Vertical"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top"
+                    Grid.Row="1">
+
+                    <TextBlock 
+                        Text="Искренний сервис"
+                        FontSize="20"/>
+
+                    <TextBlock
+                        FontSize="15">
+                        <LineBreak/>
+                        Особый акцент компания делает на сервисном обслуживании. У
+                        <LineBreak/>
+                        нас нет покупателей: все, кто заходит в наши галереи, — являются
+                        <LineBreak/>
+                        нашими Гостями. Поэтому продавцы- консультанты всегда
+                        <LineBreak/>
+                        приветливы, гостеприимны и с радостью готовы помочь в
+                        <LineBreak/>
+                        выборе.
+
+                    </TextBlock>
+
+                    <TextBlock
+                        FontSize="15"
+                        Margin="0 0 0 20">
+                        <LineBreak/>
+                        «TeaTime» — это не просто сеть галерей с уникальным
+                        <LineBreak/>
+                        чайно-кофейным ассортиментом, изысканными десертами и
+                        <LineBreak/>
+                        невероятной красоты подарками, это — молодая, креативная
+                        <LineBreak/>
+                        команда, которая находится в постоянном движении, развитии.
+                        <LineBreak/>
+                        Это команда, работающая для Вас честно и с удовольствием!
+                        </TextBlock>
+                </StackPanel>
+            </Grid>
+            
+            
+            <Image 
+                Source="/Image/LogIn.png"
+                Grid.Column="1"
+                Width="320" Height="450"
+                HorizontalAlignment="Right"
+                Margin="35 0 35 20"/>
+        </Grid>
+    </Grid>
+</Window>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="49005908234a40f397de532dcbcd6f07" Name="Diagram1">
+        <EntityTypeShape EntityType="DiplomModel.BonusCard" Width="1.5" PointX="0.75" PointY="15.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DiplomModel.Category" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DiplomModel.City" Width="1.5" PointX="3.75" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DiplomModel.Country" Width="1.5" PointX="0.75" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DiplomModel.Delivery" Width="1.5" PointX="8.25" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DiplomModel.Employee" Width="1.5" PointX="0.75" PointY="24.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DiplomModel.Form" Width="1.5" PointX="0.75" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="DiplomModel.Gender" Width="1.5" PointX="1.5" PointY="29.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DiplomModel.Position" Width="1.5" PointX="1.5" PointY="31.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DiplomModel.Product" Width="1.5" PointX="3" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DiplomModel.ProductInDelivery" Width="1.5" PointX="10.5" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DiplomModel.ProductInSale" Width="1.5" PointX="5.25" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DiplomModel.Provider" Width="1.5" PointX="6" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DiplomModel.Sale" Width="1.5" PointX="3" PointY="17.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DiplomModel.Status" Width="1.5" PointX="1.5" PointY="21.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DiplomModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DiplomModel.Unit" Width="1.5" PointX="0.75" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DiplomModel.View" Width="1.5" PointX="0.75" PointY="12.75" IsExpanded="true" />
+        <AssociationConnector Association="DiplomModel.FK_BonusCard_Status" ManuallyRouted="false" />
+        <AssociationConnector Association="DiplomModel.FK_Sale_BonusCard" ManuallyRouted="false" />
+        <AssociationConnector Association="DiplomModel.FK_Product_Category" ManuallyRouted="false" />
+        <AssociationConnector Association="DiplomModel.FK_Provider_City" ManuallyRouted="false" />
+        <AssociationConnector Association="DiplomModel.FK_Product_Country" ManuallyRouted="false" />
+        <AssociationConnector Association="DiplomModel.FK_Provider_Country" ManuallyRouted="false" />
+        <AssociationConnector Association="DiplomModel.FK_Delivery_Employee" ManuallyRouted="false" />
+        <AssociationConnector Association="DiplomModel.FK_Delivery_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="DiplomModel.FK_Delivery_Provider" ManuallyRouted="false" />
+        <AssociationConnector Association="DiplomModel.FK_ProductInDelivery_Delivery" ManuallyRouted="false" />
+        <AssociationConnector Association="DiplomModel.FK_Employee_Gender" ManuallyRouted="false" />
+        <AssociationConnector Association="DiplomModel.FK_Employee_Position" ManuallyRouted="false" />
+        <AssociationConnector Association="DiplomModel.FK_Sale_Employee" ManuallyRouted="false" />
+        <AssociationConnector Association="DiplomModel.FK_Product_Form" ManuallyRouted="false" />
+        <AssociationConnector Association="DiplomModel.FK_Product_Module" ManuallyRouted="false" />
+        <AssociationConnector Association="DiplomModel.FK_Product_View" ManuallyRouted="false" />
+        <AssociationConnector Association="DiplomModel.FK_ProductInDelivery_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="DiplomModel.FK_ProductInSale_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="DiplomModel.FK_ProductInSale_Sale" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
