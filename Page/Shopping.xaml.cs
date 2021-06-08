@@ -25,6 +25,7 @@ namespace Tea.Page
         int countProduct = 0;
         decimal finalSum = 0;
         List<Product> gProductBascet;
+        List<Basket> gBasketList = new List<Basket>();
         ListProduct gWindow;
         Employee gUser;
         bool CardAdded = false;
@@ -37,20 +38,45 @@ namespace Tea.Page
 
             for(int i = 0; i < gProductBascet.Count; i++)
             {
-                finalSum += gProductBascet[i].Price;
+                bool bProductHave = false;
+                for(int g = 0; g < gBasketList.Count; g++)
+                {
+                    if(gBasketList[g].product.IdProduct == gProductBascet[i].IdProduct)
+                    {
+                        gBasketList[g].TotalPrice += gBasketList[g].product.Price;
+                        gBasketList[g].Count++;
+                        bProductHave = true;
+                    }
+                }
+                if (!bProductHave)
+                {
+                    gBasketList.Add(new Basket
+                    {
+                        product = gProductBascet[i],
+                        TotalPrice = gProductBascet[i].Price,
+                        Count = 1
+                    });
+                }
             }
 
-            Lv_Bascet.ItemsSource = gProductBascet.ToList();
+            Lv_Bascet.ItemsSource = gBasketList.ToList();
 
-            countProduct = gProductBascet.Count();
-            Tb_CountBascet.Text = countProduct.ToString();
-            Tb_FinalSum.Text = finalSum.ToString();
-            
+            UpdateAll();
 
             Btn_Checkout.IsEnabled = false;
         }
 
-     
+        private void UpdateAll()
+        {
+            countProduct = 0;
+            for (int i = 0; i < gBasketList.Count; i++)
+            {
+                countProduct += gBasketList[i].Count;
+            }
+            Tb_CountBascet.Text = countProduct.ToString();
+
+            CheckSumm();
+        }
 
         private void Btn_List_Product_Click(object sender, RoutedEventArgs e)
         {
@@ -81,11 +107,14 @@ namespace Tea.Page
             Sale sale;
             if (CardAdded)
             {
+                int cardID = Convert.ToInt32(Tb_NumberCard.Text);
+                var card = db.BonusCard.Where(i => i.IdCard == cardID).FirstOrDefault();
+                card.CountBall += finalSum * Convert.ToDecimal(0.1);
                 sale = db.Sale.Add(new Sale
                 {
                     IdEmployee = gUser.IdEmployee,
                     Date = DateTime.Now,
-                    IdBonusCard = Convert.ToInt32(Tb_NumberCard.Text)
+                    IdBonusCard = cardID
                 });
             }
             else
@@ -106,6 +135,8 @@ namespace Tea.Page
                     IdProduct = idProduct,
                     Quantity = 1
                 });
+                var product = db.Product.Where(g => g.IdProduct == idProduct).FirstOrDefault();
+                product.Quantity -= 1;
             }
             db.SaveChanges();
 
@@ -120,16 +151,78 @@ namespace Tea.Page
             if (bonuscard.Count() == 1)
             {
                 decimal DiscountBD = bonuscard.First().Status.Discount;
+                TBDiscount.Text = $"({DiscountBD}%)";
                 decimal Discount = 1 - (DiscountBD / 100);
                 decimal newprice = finalSum * Discount;
-                Tb_FinalSum.Text = newprice.ToString();
-                PriceDiscount.Text = (finalSum - newprice).ToString() + " Р";
+                PriceDiscount.Text = (finalSum - newprice).ToString();
+                finalSum = newprice;
+                CheckSumm(false);
                 CardAdded = true;
             }
             else
             {
+                CheckSumm();
                 CardAdded = false;
             }
         }
+
+        public void CheckSumm(bool Check = true)
+        {
+            if (Check)
+            {
+                finalSum = 0;
+                for (int i = 0; i < gProductBascet.Count; i++)
+                {
+                    finalSum += gProductBascet[i].Price;
+                }
+
+                PriceDiscount.Text = "0";
+                TBDiscount.Text = "(0%)";
+                Tb_FinalSum.Text = finalSum.ToString();
+            }
+            else
+            {
+                Tb_FinalSum.Text = finalSum.ToString();
+            }
+        }
+
+        private void BTNMinusCount_Click(object sender, RoutedEventArgs e)
+        {
+            var button = sender as Button;
+            if (button == null)
+                return;
+            var BasketItem = button.DataContext as Basket;
+            if(BasketItem.Count>1)
+            {
+                BasketItem.Count--;
+                BasketItem.TotalPrice -= BasketItem.product.Price;
+            }
+            else
+            {
+                gBasketList.Remove(BasketItem);
+            }
+            gProductBascet.Remove(BasketItem.product);
+            Lv_Bascet.ItemsSource = gBasketList.ToList();
+            UpdateAll();
+        }
+
+        private void BTNPlusCount_Click(object sender, RoutedEventArgs e)
+        {
+            var button = sender as Button;
+            if (button == null)
+                return;
+            var BasketItem = button.DataContext as Basket;
+            BasketItem.Count++;
+            BasketItem.TotalPrice += BasketItem.product.Price;
+            gProductBascet.Add(BasketItem.product);
+            Lv_Bascet.ItemsSource = gBasketList.ToList();
+            UpdateAll();
+        }
+    }
+    public class Basket
+    {
+        public Product product { get; set; }
+        public int TotalPrice { get; set; }
+        public int Count { get; set; }
     }
 }

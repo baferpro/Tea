@@ -38,6 +38,7 @@ namespace Tea.Page
             {
                 db.BonusCard.Add(new ModelSQL.BonusCard
                 {
+                    DateCreate = DateTime.Now,
                     FName = TB_FName.Text,
                     SName = TB_Name.Text,
                     BirthdayDay = DP_Birthday.SelectedDate.Value,

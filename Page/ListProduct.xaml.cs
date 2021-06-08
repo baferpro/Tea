@@ -104,7 +104,6 @@ namespace Tea.Page
             Shopping shopping = new Shopping(productList, this, gUser);
             this.Visibility = Visibility.Hidden;
             shopping.ShowDialog();
-            this.Visibility = Visibility.Visible;
         }
 
         private void TB_Search_Articul_TextChanged(object sender, TextChangedEventArgs e)

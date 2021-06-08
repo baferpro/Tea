@@ -101,7 +101,7 @@
                                 <Border>
                                     <Image Width="125"
                                            Margin="0 0 7 0"
-                                           Source="{Binding Image}">
+                                           Source="{Binding product.Image}">
                                     </Image>
                                 </Border>
 
@@ -110,7 +110,7 @@
                                     Grid.Column="1"
                                     Margin="0 30 0 0">
 
-                                    <TextBlock Text="{Binding Name}"
+                                    <TextBlock Text="{Binding product.Name}"
                                                FontSize="14"/>
 
                                     <TextBlock 
@@ -123,21 +123,21 @@
 
                                     <StackPanel Orientation="Horizontal">
                                         <TextBlock Text="Вид: "/>
-                                        <TextBlock Text="{Binding View.Name}"
+                                        <TextBlock Text="{Binding product.View.Name}"
                                                FontSize="13"/>
                                     </StackPanel>
 
                                     <StackPanel Orientation="Horizontal">
                                         <TextBlock Text="В наличии: "
                                                    FontSize="13"/>
-                                        <TextBlock Text="{Binding Quantity}"
+                                        <TextBlock Text="{Binding product.Quantity}"
                                                FontSize="13"/>
                                         <TextBlock Text=" "/>
-                                        <TextBlock Text="{Binding Unit.Name}"
+                                        <TextBlock Text="{Binding product.Unit.Name}"
                                                FontSize="13"/>
                                         <TextBlock
                                             Text="                          "/>
-                                        <TextBlock Text="{Binding Price}"  
+                                        <TextBlock Text="{Binding TotalPrice}"  
                                                FontSize="20"/>
                                         <TextBlock Text=" Р"  
                                                FontSize="20"/>
@@ -156,13 +156,16 @@
                                             HorizontalAlignment="Right"
                                             VerticalAlignment="Bottom"
                                             BorderBrush="Black"
-                                            Background="White">
+                                            Background="White"
+                                            x:Name="BTNMinusCount"
+                                            Click="BTNMinusCount_Click"
+                                            Content="-">
                                         </Button>
 
-                                        <TextBlock
-                                            Name="TB_Final_Price"
-                                            Text=""
-                                            FontSize="14"/>
+                                        <TextBlock  Text="{Binding Count}"
+                                                    FontSize="14"
+                                                    Margin="25 0 0 0"
+                                                    HorizontalAlignment="Center"/>
 
                                         <Button
                                             Width="20"  Height="20"
@@ -170,7 +173,10 @@
                                             VerticalAlignment="Bottom"
                                             BorderBrush="Black"
                                             Background="White"
-                                            Margin="50 0 0 0">
+                                            Margin="25 0 0 0"
+                                            x:Name="BTNPlusCount"
+                                            Click="BTNPlusCount_Click"
+                                            Content="+">
                                         </Button>
                                     </StackPanel>
                                 </StackPanel>
@@ -231,11 +237,18 @@
                 
                 <StackPanel Orientation="Horizontal"
                             Margin="0 30 0 0">
-                    <TextBlock Text="Скидка по крате:     "
+                    <TextBlock Text="Скидка по карте:     "
                                FontSize="18"/>
-                    <TextBlock Text="0 P"
+                    <TextBlock Text="0"
                                FontSize="18"
-                               x:Name="PriceDiscount"/>
+                               x:Name="PriceDiscount"
+                               Margin="0, 0, 10, 0"/>
+                    <TextBlock Text="Р"
+                               FontSize="18"
+                               Margin="0, 0, 10, 0"/>
+                    <TextBlock Text="(0%)"
+                               FontSize="18"
+                               x:Name="TBDiscount"/>
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal"
@@ -253,7 +266,8 @@
                                FontSize="18"/>
                     <TextBlock 
                         x:Name="Tb_FinalSum"
-                        FontSize="18"/>
+                        FontSize="18"
+                        Margin="0, 0, 10, 0"/>
                     <TextBlock 
                         Text="P"
                         FontSize="18"/>
