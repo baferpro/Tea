@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище DiplomModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище DiplomModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="BonusCard">
           <Key>
             <PropertyRef Name="IdCard" />
@@ -89,8 +89,8 @@
           </Key>
           <Property Name="IdProduct" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="150" Nullable="false" />
-          <Property Name="Quantity" Type="float" Nullable="false" />
-          <Property Name="Image" Type="varbinary(max)" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="Images" Type="varbinary(max)" />
           <Property Name="Price" Type="int" Nullable="false" />
           <Property Name="Information" Type="nvarchar" MaxLength="400" />
           <Property Name="IdUnit" Type="int" Nullable="false" />
@@ -494,49 +494,144 @@
             <End Role="Sale" EntitySet="Sale" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DiplomModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="DiplomEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BonusCard" EntityType="DiplomModel.BonusCard" />
+          <EntitySet Name="Category" EntityType="DiplomModel.Category" />
+          <EntitySet Name="City" EntityType="DiplomModel.City" />
+          <EntitySet Name="Country" EntityType="DiplomModel.Country" />
+          <EntitySet Name="Delivery" EntityType="DiplomModel.Delivery" />
+          <EntitySet Name="Employee" EntityType="DiplomModel.Employee" />
+          <EntitySet Name="Form" EntityType="DiplomModel.Form" />
+          <EntitySet Name="Gender" EntityType="DiplomModel.Gender" />
+          <EntitySet Name="Position" EntityType="DiplomModel.Position" />
+          <EntitySet Name="Product" EntityType="DiplomModel.Product" />
+          <EntitySet Name="ProductInDelivery" EntityType="DiplomModel.ProductInDelivery" />
+          <EntitySet Name="ProductInSale" EntityType="DiplomModel.ProductInSale" />
+          <EntitySet Name="Provider" EntityType="DiplomModel.Provider" />
+          <EntitySet Name="Sale" EntityType="DiplomModel.Sale" />
+          <EntitySet Name="Status" EntityType="DiplomModel.Status" />
+          <EntitySet Name="sysdiagrams" EntityType="DiplomModel.sysdiagrams" />
+          <EntitySet Name="Unit" EntityType="DiplomModel.Unit" />
+          <EntitySet Name="View" EntityType="DiplomModel.View" />
+          <AssociationSet Name="FK_BonusCard_Status" Association="DiplomModel.FK_BonusCard_Status">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="BonusCard" EntitySet="BonusCard" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sale_BonusCard" Association="DiplomModel.FK_Sale_BonusCard">
+            <End Role="BonusCard" EntitySet="BonusCard" />
+            <End Role="Sale" EntitySet="Sale" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_Category" Association="DiplomModel.FK_Product_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Provider_City" Association="DiplomModel.FK_Provider_City">
+            <End Role="City" EntitySet="City" />
+            <End Role="Provider" EntitySet="Provider" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_Country" Association="DiplomModel.FK_Product_Country">
+            <End Role="Country" EntitySet="Country" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Provider_Country" Association="DiplomModel.FK_Provider_Country">
+            <End Role="Country" EntitySet="Country" />
+            <End Role="Provider" EntitySet="Provider" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Delivery_Employee" Association="DiplomModel.FK_Delivery_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Delivery" EntitySet="Delivery" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Delivery_Product" Association="DiplomModel.FK_Delivery_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Delivery" EntitySet="Delivery" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Delivery_Provider" Association="DiplomModel.FK_Delivery_Provider">
+            <End Role="Provider" EntitySet="Provider" />
+            <End Role="Delivery" EntitySet="Delivery" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductInDelivery_Delivery" Association="DiplomModel.FK_ProductInDelivery_Delivery">
+            <End Role="Delivery" EntitySet="Delivery" />
+            <End Role="ProductInDelivery" EntitySet="ProductInDelivery" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_Gender" Association="DiplomModel.FK_Employee_Gender">
+            <End Role="Gender" EntitySet="Gender" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_Position" Association="DiplomModel.FK_Employee_Position">
+            <End Role="Position" EntitySet="Position" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sale_Employee" Association="DiplomModel.FK_Sale_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Sale" EntitySet="Sale" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_Form" Association="DiplomModel.FK_Product_Form">
+            <End Role="Form" EntitySet="Form" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_Module" Association="DiplomModel.FK_Product_Module">
+            <End Role="Unit" EntitySet="Unit" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_View" Association="DiplomModel.FK_Product_View">
+            <End Role="View" EntitySet="View" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductInDelivery_Product" Association="DiplomModel.FK_ProductInDelivery_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="ProductInDelivery" EntitySet="ProductInDelivery" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductInSale_Product" Association="DiplomModel.FK_ProductInSale_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="ProductInSale" EntitySet="ProductInSale" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductInSale_Sale" Association="DiplomModel.FK_ProductInSale_Sale">
+            <End Role="Sale" EntitySet="Sale" />
+            <End Role="ProductInSale" EntitySet="ProductInSale" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="BonusCard">
           <Key>
             <PropertyRef Name="IdCard" />
           </Key>
           <Property Name="IdCard" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CountBall" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
-          <Property Name="SName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="FName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CountBall" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="SName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="FName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="DateCreate" Type="DateTime" Precision="0" />
           <Property Name="BirthdayDay" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="IdStatus" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Status" Relationship="Self.FK_BonusCard_Status" FromRole="BonusCard" ToRole="Status" />
-          <NavigationProperty Name="Sale" Relationship="Self.FK_Sale_BonusCard" FromRole="BonusCard" ToRole="Sale" />
+          <NavigationProperty Name="Status" Relationship="DiplomModel.FK_BonusCard_Status" FromRole="BonusCard" ToRole="Status" />
+          <NavigationProperty Name="Sale" Relationship="DiplomModel.FK_Sale_BonusCard" FromRole="BonusCard" ToRole="Sale" />
         </EntityType>
         <EntityType Name="Category">
           <Key>
             <PropertyRef Name="IdCategory" />
           </Key>
           <Property Name="IdCategory" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="350" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Product" Relationship="Self.FK_Product_Category" FromRole="Category" ToRole="Product" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="350" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Product" Relationship="DiplomModel.FK_Product_Category" FromRole="Category" ToRole="Product" />
         </EntityType>
         <EntityType Name="City">
           <Key>
             <PropertyRef Name="IdCity" />
           </Key>
           <Property Name="IdCity" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Provider" Relationship="Self.FK_Provider_City" FromRole="City" ToRole="Provider" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Provider" Relationship="DiplomModel.FK_Provider_City" FromRole="City" ToRole="Provider" />
         </EntityType>
         <EntityType Name="Country">
           <Key>
             <PropertyRef Name="IdCountry" />
           </Key>
           <Property Name="IdCountry" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Product" Relationship="Self.FK_Product_Country" FromRole="Country" ToRole="Product" />
-          <NavigationProperty Name="Provider" Relationship="Self.FK_Provider_Country" FromRole="Country" ToRole="Provider" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Product" Relationship="DiplomModel.FK_Product_Country" FromRole="Country" ToRole="Product" />
+          <NavigationProperty Name="Provider" Relationship="DiplomModel.FK_Provider_Country" FromRole="Country" ToRole="Provider" />
         </EntityType>
         <EntityType Name="Delivery">
           <Key>
@@ -547,61 +642,61 @@
           <Property Name="IdEmployee" Type="Int32" Nullable="false" />
           <Property Name="IdProvider" Type="Int32" Nullable="false" />
           <Property Name="IdProduct" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Employee" Relationship="Self.FK_Delivery_Employee" FromRole="Delivery" ToRole="Employee" />
-          <NavigationProperty Name="Product" Relationship="Self.FK_Delivery_Product" FromRole="Delivery" ToRole="Product" />
-          <NavigationProperty Name="Provider" Relationship="Self.FK_Delivery_Provider" FromRole="Delivery" ToRole="Provider" />
-          <NavigationProperty Name="ProductInDelivery" Relationship="Self.FK_ProductInDelivery_Delivery" FromRole="Delivery" ToRole="ProductInDelivery" />
+          <NavigationProperty Name="Employee" Relationship="DiplomModel.FK_Delivery_Employee" FromRole="Delivery" ToRole="Employee" />
+          <NavigationProperty Name="Product" Relationship="DiplomModel.FK_Delivery_Product" FromRole="Delivery" ToRole="Product" />
+          <NavigationProperty Name="Provider" Relationship="DiplomModel.FK_Delivery_Provider" FromRole="Delivery" ToRole="Provider" />
+          <NavigationProperty Name="ProductInDelivery" Relationship="DiplomModel.FK_ProductInDelivery_Delivery" FromRole="Delivery" ToRole="ProductInDelivery" />
         </EntityType>
         <EntityType Name="Employee">
           <Key>
             <PropertyRef Name="IdEmployee" />
           </Key>
           <Property Name="IdEmployee" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="SName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="MName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Phone" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Phone" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
           <Property Name="IdGender" Type="Int32" Nullable="false" />
           <Property Name="IdPosition" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Delivery" Relationship="Self.FK_Delivery_Employee" FromRole="Employee" ToRole="Delivery" />
-          <NavigationProperty Name="Gender" Relationship="Self.FK_Employee_Gender" FromRole="Employee" ToRole="Gender" />
-          <NavigationProperty Name="Position" Relationship="Self.FK_Employee_Position" FromRole="Employee" ToRole="Position" />
-          <NavigationProperty Name="Sale" Relationship="Self.FK_Sale_Employee" FromRole="Employee" ToRole="Sale" />
+          <NavigationProperty Name="Delivery" Relationship="DiplomModel.FK_Delivery_Employee" FromRole="Employee" ToRole="Delivery" />
+          <NavigationProperty Name="Gender" Relationship="DiplomModel.FK_Employee_Gender" FromRole="Employee" ToRole="Gender" />
+          <NavigationProperty Name="Position" Relationship="DiplomModel.FK_Employee_Position" FromRole="Employee" ToRole="Position" />
+          <NavigationProperty Name="Sale" Relationship="DiplomModel.FK_Sale_Employee" FromRole="Employee" ToRole="Sale" />
         </EntityType>
         <EntityType Name="Form">
           <Key>
             <PropertyRef Name="IdForm" />
           </Key>
           <Property Name="IdForm" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Product" Relationship="Self.FK_Product_Form" FromRole="Form" ToRole="Product" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Product" Relationship="DiplomModel.FK_Product_Form" FromRole="Form" ToRole="Product" />
         </EntityType>
         <EntityType Name="Gender">
           <Key>
             <PropertyRef Name="IdGender" />
           </Key>
           <Property Name="IdGender" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Employee" Relationship="Self.FK_Employee_Gender" FromRole="Gender" ToRole="Employee" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Employee" Relationship="DiplomModel.FK_Employee_Gender" FromRole="Gender" ToRole="Employee" />
         </EntityType>
         <EntityType Name="Position">
           <Key>
             <PropertyRef Name="IdPosition" />
           </Key>
           <Property Name="IdPosition" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Employee" Relationship="Self.FK_Employee_Position" FromRole="Position" ToRole="Employee" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Employee" Relationship="DiplomModel.FK_Employee_Position" FromRole="Position" ToRole="Employee" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
             <PropertyRef Name="IdProduct" />
           </Key>
           <Property Name="IdProduct" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Quantity" Type="Double" Nullable="false" />
-          <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="Images" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="Price" Type="Int32" Nullable="false" />
           <Property Name="Information" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
           <Property Name="IdUnit" Type="Int32" Nullable="false" />
@@ -609,14 +704,14 @@
           <Property Name="IdCountry" Type="Int32" Nullable="false" />
           <Property Name="IdView" Type="Int32" Nullable="false" />
           <Property Name="IdCategory" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Category" Relationship="Self.FK_Product_Category" FromRole="Product" ToRole="Category" />
-          <NavigationProperty Name="Country" Relationship="Self.FK_Product_Country" FromRole="Product" ToRole="Country" />
-          <NavigationProperty Name="Delivery" Relationship="Self.FK_Delivery_Product" FromRole="Product" ToRole="Delivery" />
-          <NavigationProperty Name="Form" Relationship="Self.FK_Product_Form" FromRole="Product" ToRole="Form" />
-          <NavigationProperty Name="Unit" Relationship="Self.FK_Product_Module" FromRole="Product" ToRole="Unit" />
-          <NavigationProperty Name="View" Relationship="Self.FK_Product_View" FromRole="Product" ToRole="View" />
-          <NavigationProperty Name="ProductInDelivery" Relationship="Self.FK_ProductInDelivery_Product" FromRole="Product" ToRole="ProductInDelivery" />
-          <NavigationProperty Name="ProductInSale" Relationship="Self.FK_ProductInSale_Product" FromRole="Product" ToRole="ProductInSale" />
+          <NavigationProperty Name="Category" Relationship="DiplomModel.FK_Product_Category" FromRole="Product" ToRole="Category" />
+          <NavigationProperty Name="Country" Relationship="DiplomModel.FK_Product_Country" FromRole="Product" ToRole="Country" />
+          <NavigationProperty Name="Delivery" Relationship="DiplomModel.FK_Delivery_Product" FromRole="Product" ToRole="Delivery" />
+          <NavigationProperty Name="Form" Relationship="DiplomModel.FK_Product_Form" FromRole="Product" ToRole="Form" />
+          <NavigationProperty Name="Unit" Relationship="DiplomModel.FK_Product_Module" FromRole="Product" ToRole="Unit" />
+          <NavigationProperty Name="View" Relationship="DiplomModel.FK_Product_View" FromRole="Product" ToRole="View" />
+          <NavigationProperty Name="ProductInDelivery" Relationship="DiplomModel.FK_ProductInDelivery_Product" FromRole="Product" ToRole="ProductInDelivery" />
+          <NavigationProperty Name="ProductInSale" Relationship="DiplomModel.FK_ProductInSale_Product" FromRole="Product" ToRole="ProductInSale" />
         </EntityType>
         <EntityType Name="ProductInDelivery">
           <Key>
@@ -626,8 +721,8 @@
           <Property Name="Quantity" Type="Double" Nullable="false" />
           <Property Name="IdDelivery" Type="Int32" Nullable="false" />
           <Property Name="IdProduct" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Delivery" Relationship="Self.FK_ProductInDelivery_Delivery" FromRole="ProductInDelivery" ToRole="Delivery" />
-          <NavigationProperty Name="Product" Relationship="Self.FK_ProductInDelivery_Product" FromRole="ProductInDelivery" ToRole="Product" />
+          <NavigationProperty Name="Delivery" Relationship="DiplomModel.FK_ProductInDelivery_Delivery" FromRole="ProductInDelivery" ToRole="Delivery" />
+          <NavigationProperty Name="Product" Relationship="DiplomModel.FK_ProductInDelivery_Product" FromRole="ProductInDelivery" ToRole="Product" />
         </EntityType>
         <EntityType Name="ProductInSale">
           <Key>
@@ -637,23 +732,23 @@
           <Property Name="Quantity" Type="Double" Nullable="false" />
           <Property Name="IdSale" Type="Int32" Nullable="false" />
           <Property Name="IdProduct" Type="Int32" />
-          <NavigationProperty Name="Product" Relationship="Self.FK_ProductInSale_Product" FromRole="ProductInSale" ToRole="Product" />
-          <NavigationProperty Name="Sale" Relationship="Self.FK_ProductInSale_Sale" FromRole="ProductInSale" ToRole="Sale" />
+          <NavigationProperty Name="Product" Relationship="DiplomModel.FK_ProductInSale_Product" FromRole="ProductInSale" ToRole="Product" />
+          <NavigationProperty Name="Sale" Relationship="DiplomModel.FK_ProductInSale_Sale" FromRole="ProductInSale" ToRole="Sale" />
         </EntityType>
         <EntityType Name="Provider">
           <Key>
             <PropertyRef Name="IdProvider" />
           </Key>
           <Property Name="IdProvider" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Adress" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Adress" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Phone" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Phone" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
           <Property Name="IdCountry" Type="Int32" Nullable="false" />
           <Property Name="IdCity" Type="Int32" />
-          <NavigationProperty Name="City" Relationship="Self.FK_Provider_City" FromRole="Provider" ToRole="City" />
-          <NavigationProperty Name="Country" Relationship="Self.FK_Provider_Country" FromRole="Provider" ToRole="Country" />
-          <NavigationProperty Name="Delivery" Relationship="Self.FK_Delivery_Provider" FromRole="Provider" ToRole="Delivery" />
+          <NavigationProperty Name="City" Relationship="DiplomModel.FK_Provider_City" FromRole="Provider" ToRole="City" />
+          <NavigationProperty Name="Country" Relationship="DiplomModel.FK_Provider_Country" FromRole="Provider" ToRole="Country" />
+          <NavigationProperty Name="Delivery" Relationship="DiplomModel.FK_Delivery_Provider" FromRole="Provider" ToRole="Delivery" />
         </EntityType>
         <EntityType Name="Sale">
           <Key>
@@ -663,24 +758,24 @@
           <Property Name="Date" Type="DateTime" Precision="3" />
           <Property Name="IdEmployee" Type="Int32" Nullable="false" />
           <Property Name="IdBonusCard" Type="Int32" />
-          <NavigationProperty Name="BonusCard" Relationship="Self.FK_Sale_BonusCard" FromRole="Sale" ToRole="BonusCard" />
-          <NavigationProperty Name="Employee" Relationship="Self.FK_Sale_Employee" FromRole="Sale" ToRole="Employee" />
-          <NavigationProperty Name="ProductInSale" Relationship="Self.FK_ProductInSale_Sale" FromRole="Sale" ToRole="ProductInSale" />
+          <NavigationProperty Name="BonusCard" Relationship="DiplomModel.FK_Sale_BonusCard" FromRole="Sale" ToRole="BonusCard" />
+          <NavigationProperty Name="Employee" Relationship="DiplomModel.FK_Sale_Employee" FromRole="Sale" ToRole="Employee" />
+          <NavigationProperty Name="ProductInSale" Relationship="DiplomModel.FK_ProductInSale_Sale" FromRole="Sale" ToRole="ProductInSale" />
         </EntityType>
         <EntityType Name="Status">
           <Key>
             <PropertyRef Name="IdStatus" />
           </Key>
           <Property Name="IdStatus" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Discount" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="BonusCard" Relationship="Self.FK_BonusCard_Status" FromRole="Status" ToRole="BonusCard" />
+          <NavigationProperty Name="BonusCard" Relationship="DiplomModel.FK_BonusCard_Status" FromRole="Status" ToRole="BonusCard" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
           </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="principal_id" Type="Int32" Nullable="false" />
           <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="version" Type="Int32" />
@@ -691,20 +786,20 @@
             <PropertyRef Name="IdUnit" />
           </Key>
           <Property Name="IdUnit" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Product" Relationship="Self.FK_Product_Module" FromRole="Unit" ToRole="Product" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Product" Relationship="DiplomModel.FK_Product_Module" FromRole="Unit" ToRole="Product" />
         </EntityType>
         <EntityType Name="View">
           <Key>
             <PropertyRef Name="IdView" />
           </Key>
           <Property Name="IdView" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Product" Relationship="Self.FK_Product_View" FromRole="View" ToRole="Product" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Product" Relationship="DiplomModel.FK_Product_View" FromRole="View" ToRole="Product" />
         </EntityType>
         <Association Name="FK_BonusCard_Status">
-          <End Role="Status" Type="Self.Status" Multiplicity="1" />
-          <End Role="BonusCard" Type="Self.BonusCard" Multiplicity="*" />
+          <End Type="DiplomModel.Status" Role="Status" Multiplicity="1" />
+          <End Type="DiplomModel.BonusCard" Role="BonusCard" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Status">
               <PropertyRef Name="IdStatus" />
@@ -715,8 +810,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Sale_BonusCard">
-          <End Role="BonusCard" Type="Self.BonusCard" Multiplicity="0..1" />
-          <End Role="Sale" Type="Self.Sale" Multiplicity="*" />
+          <End Type="DiplomModel.BonusCard" Role="BonusCard" Multiplicity="0..1" />
+          <End Type="DiplomModel.Sale" Role="Sale" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="BonusCard">
               <PropertyRef Name="IdCard" />
@@ -727,8 +822,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Product_Category">
-          <End Role="Category" Type="Self.Category" Multiplicity="1" />
-          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <End Type="DiplomModel.Category" Role="Category" Multiplicity="1" />
+          <End Type="DiplomModel.Product" Role="Product" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Category">
               <PropertyRef Name="IdCategory" />
@@ -739,8 +834,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Provider_City">
-          <End Role="City" Type="Self.City" Multiplicity="0..1" />
-          <End Role="Provider" Type="Self.Provider" Multiplicity="*" />
+          <End Type="DiplomModel.City" Role="City" Multiplicity="0..1" />
+          <End Type="DiplomModel.Provider" Role="Provider" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="City">
               <PropertyRef Name="IdCity" />
@@ -751,8 +846,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Product_Country">
-          <End Role="Country" Type="Self.Country" Multiplicity="1" />
-          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <End Type="DiplomModel.Country" Role="Country" Multiplicity="1" />
+          <End Type="DiplomModel.Product" Role="Product" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Country">
               <PropertyRef Name="IdCountry" />
@@ -763,8 +858,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Provider_Country">
-          <End Role="Country" Type="Self.Country" Multiplicity="1" />
-          <End Role="Provider" Type="Self.Provider" Multiplicity="*" />
+          <End Type="DiplomModel.Country" Role="Country" Multiplicity="1" />
+          <End Type="DiplomModel.Provider" Role="Provider" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Country">
               <PropertyRef Name="IdCountry" />
@@ -775,8 +870,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Delivery_Employee">
-          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
-          <End Role="Delivery" Type="Self.Delivery" Multiplicity="*" />
+          <End Type="DiplomModel.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="DiplomModel.Delivery" Role="Delivery" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Employee">
               <PropertyRef Name="IdEmployee" />
@@ -787,8 +882,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Delivery_Product">
-          <End Role="Product" Type="Self.Product" Multiplicity="1" />
-          <End Role="Delivery" Type="Self.Delivery" Multiplicity="*" />
+          <End Type="DiplomModel.Product" Role="Product" Multiplicity="1" />
+          <End Type="DiplomModel.Delivery" Role="Delivery" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Product">
               <PropertyRef Name="IdProduct" />
@@ -799,8 +894,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Delivery_Provider">
-          <End Role="Provider" Type="Self.Provider" Multiplicity="1" />
-          <End Role="Delivery" Type="Self.Delivery" Multiplicity="*" />
+          <End Type="DiplomModel.Provider" Role="Provider" Multiplicity="1" />
+          <End Type="DiplomModel.Delivery" Role="Delivery" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Provider">
               <PropertyRef Name="IdProvider" />
@@ -811,8 +906,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ProductInDelivery_Delivery">
-          <End Role="Delivery" Type="Self.Delivery" Multiplicity="1" />
-          <End Role="ProductInDelivery" Type="Self.ProductInDelivery" Multiplicity="*" />
+          <End Type="DiplomModel.Delivery" Role="Delivery" Multiplicity="1" />
+          <End Type="DiplomModel.ProductInDelivery" Role="ProductInDelivery" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Delivery">
               <PropertyRef Name="IdDelivery" />
@@ -823,8 +918,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Employee_Gender">
-          <End Role="Gender" Type="Self.Gender" Multiplicity="1" />
-          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <End Type="DiplomModel.Gender" Role="Gender" Multiplicity="1" />
+          <End Type="DiplomModel.Employee" Role="Employee" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Gender">
               <PropertyRef Name="IdGender" />
@@ -835,8 +930,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Employee_Position">
-          <End Role="Position" Type="Self.Position" Multiplicity="1" />
-          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <End Type="DiplomModel.Position" Role="Position" Multiplicity="1" />
+          <End Type="DiplomModel.Employee" Role="Employee" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Position">
               <PropertyRef Name="IdPosition" />
@@ -847,8 +942,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Sale_Employee">
-          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
-          <End Role="Sale" Type="Self.Sale" Multiplicity="*" />
+          <End Type="DiplomModel.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="DiplomModel.Sale" Role="Sale" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Employee">
               <PropertyRef Name="IdEmployee" />
@@ -859,8 +954,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Product_Form">
-          <End Role="Form" Type="Self.Form" Multiplicity="1" />
-          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <End Type="DiplomModel.Form" Role="Form" Multiplicity="1" />
+          <End Type="DiplomModel.Product" Role="Product" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Form">
               <PropertyRef Name="IdForm" />
@@ -871,8 +966,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Product_Module">
-          <End Role="Unit" Type="Self.Unit" Multiplicity="1" />
-          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <End Type="DiplomModel.Unit" Role="Unit" Multiplicity="1" />
+          <End Type="DiplomModel.Product" Role="Product" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Unit">
               <PropertyRef Name="IdUnit" />
@@ -883,8 +978,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Product_View">
-          <End Role="View" Type="Self.View" Multiplicity="1" />
-          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <End Type="DiplomModel.View" Role="View" Multiplicity="1" />
+          <End Type="DiplomModel.Product" Role="Product" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="View">
               <PropertyRef Name="IdView" />
@@ -895,8 +990,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ProductInDelivery_Product">
-          <End Role="Product" Type="Self.Product" Multiplicity="1" />
-          <End Role="ProductInDelivery" Type="Self.ProductInDelivery" Multiplicity="*" />
+          <End Type="DiplomModel.Product" Role="Product" Multiplicity="1" />
+          <End Type="DiplomModel.ProductInDelivery" Role="ProductInDelivery" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Product">
               <PropertyRef Name="IdProduct" />
@@ -907,8 +1002,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ProductInSale_Product">
-          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
-          <End Role="ProductInSale" Type="Self.ProductInSale" Multiplicity="*" />
+          <End Type="DiplomModel.Product" Role="Product" Multiplicity="0..1" />
+          <End Type="DiplomModel.ProductInSale" Role="ProductInSale" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Product">
               <PropertyRef Name="IdProduct" />
@@ -919,8 +1014,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ProductInSale_Sale">
-          <End Role="Sale" Type="Self.Sale" Multiplicity="1" />
-          <End Role="ProductInSale" Type="Self.ProductInSale" Multiplicity="*" />
+          <End Type="DiplomModel.Sale" Role="Sale" Multiplicity="1" />
+          <End Type="DiplomModel.ProductInSale" Role="ProductInSale" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Sale">
               <PropertyRef Name="IdSale" />
@@ -930,103 +1025,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="DiplomEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="BonusCard" EntityType="Self.BonusCard" />
-          <EntitySet Name="Category" EntityType="Self.Category" />
-          <EntitySet Name="City" EntityType="Self.City" />
-          <EntitySet Name="Country" EntityType="Self.Country" />
-          <EntitySet Name="Delivery" EntityType="Self.Delivery" />
-          <EntitySet Name="Employee" EntityType="Self.Employee" />
-          <EntitySet Name="Form" EntityType="Self.Form" />
-          <EntitySet Name="Gender" EntityType="Self.Gender" />
-          <EntitySet Name="Position" EntityType="Self.Position" />
-          <EntitySet Name="Product" EntityType="Self.Product" />
-          <EntitySet Name="ProductInDelivery" EntityType="Self.ProductInDelivery" />
-          <EntitySet Name="ProductInSale" EntityType="Self.ProductInSale" />
-          <EntitySet Name="Provider" EntityType="Self.Provider" />
-          <EntitySet Name="Sale" EntityType="Self.Sale" />
-          <EntitySet Name="Status" EntityType="Self.Status" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
-          <EntitySet Name="Unit" EntityType="Self.Unit" />
-          <EntitySet Name="View" EntityType="Self.View" />
-          <AssociationSet Name="FK_BonusCard_Status" Association="Self.FK_BonusCard_Status">
-            <End Role="Status" EntitySet="Status" />
-            <End Role="BonusCard" EntitySet="BonusCard" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Sale_BonusCard" Association="Self.FK_Sale_BonusCard">
-            <End Role="BonusCard" EntitySet="BonusCard" />
-            <End Role="Sale" EntitySet="Sale" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Product_Category" Association="Self.FK_Product_Category">
-            <End Role="Category" EntitySet="Category" />
-            <End Role="Product" EntitySet="Product" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Provider_City" Association="Self.FK_Provider_City">
-            <End Role="City" EntitySet="City" />
-            <End Role="Provider" EntitySet="Provider" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Product_Country" Association="Self.FK_Product_Country">
-            <End Role="Country" EntitySet="Country" />
-            <End Role="Product" EntitySet="Product" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Provider_Country" Association="Self.FK_Provider_Country">
-            <End Role="Country" EntitySet="Country" />
-            <End Role="Provider" EntitySet="Provider" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Delivery_Employee" Association="Self.FK_Delivery_Employee">
-            <End Role="Employee" EntitySet="Employee" />
-            <End Role="Delivery" EntitySet="Delivery" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Delivery_Product" Association="Self.FK_Delivery_Product">
-            <End Role="Product" EntitySet="Product" />
-            <End Role="Delivery" EntitySet="Delivery" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Delivery_Provider" Association="Self.FK_Delivery_Provider">
-            <End Role="Provider" EntitySet="Provider" />
-            <End Role="Delivery" EntitySet="Delivery" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ProductInDelivery_Delivery" Association="Self.FK_ProductInDelivery_Delivery">
-            <End Role="Delivery" EntitySet="Delivery" />
-            <End Role="ProductInDelivery" EntitySet="ProductInDelivery" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Employee_Gender" Association="Self.FK_Employee_Gender">
-            <End Role="Gender" EntitySet="Gender" />
-            <End Role="Employee" EntitySet="Employee" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Employee_Position" Association="Self.FK_Employee_Position">
-            <End Role="Position" EntitySet="Position" />
-            <End Role="Employee" EntitySet="Employee" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Sale_Employee" Association="Self.FK_Sale_Employee">
-            <End Role="Employee" EntitySet="Employee" />
-            <End Role="Sale" EntitySet="Sale" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Product_Form" Association="Self.FK_Product_Form">
-            <End Role="Form" EntitySet="Form" />
-            <End Role="Product" EntitySet="Product" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Product_Module" Association="Self.FK_Product_Module">
-            <End Role="Unit" EntitySet="Unit" />
-            <End Role="Product" EntitySet="Product" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Product_View" Association="Self.FK_Product_View">
-            <End Role="View" EntitySet="View" />
-            <End Role="Product" EntitySet="Product" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ProductInDelivery_Product" Association="Self.FK_ProductInDelivery_Product">
-            <End Role="Product" EntitySet="Product" />
-            <End Role="ProductInDelivery" EntitySet="ProductInDelivery" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ProductInSale_Product" Association="Self.FK_ProductInSale_Product">
-            <End Role="Product" EntitySet="Product" />
-            <End Role="ProductInSale" EntitySet="ProductInSale" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ProductInSale_Sale" Association="Self.FK_ProductInSale_Sale">
-            <End Role="Sale" EntitySet="Sale" />
-            <End Role="ProductInSale" EntitySet="ProductInSale" />
-          </AssociationSet>
-        </EntityContainer>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -1035,183 +1034,183 @@
           <EntitySetMapping Name="BonusCard">
             <EntityTypeMapping TypeName="DiplomModel.BonusCard">
               <MappingFragment StoreEntitySet="BonusCard">
-                <ScalarProperty Name="IdCard" ColumnName="IdCard" />
-                <ScalarProperty Name="CountBall" ColumnName="CountBall" />
-                <ScalarProperty Name="SName" ColumnName="SName" />
-                <ScalarProperty Name="FName" ColumnName="FName" />
-                <ScalarProperty Name="DateCreate" ColumnName="DateCreate" />
-                <ScalarProperty Name="BirthdayDay" ColumnName="BirthdayDay" />
                 <ScalarProperty Name="IdStatus" ColumnName="IdStatus" />
+                <ScalarProperty Name="BirthdayDay" ColumnName="BirthdayDay" />
+                <ScalarProperty Name="DateCreate" ColumnName="DateCreate" />
+                <ScalarProperty Name="FName" ColumnName="FName" />
+                <ScalarProperty Name="SName" ColumnName="SName" />
+                <ScalarProperty Name="CountBall" ColumnName="CountBall" />
+                <ScalarProperty Name="IdCard" ColumnName="IdCard" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Category">
             <EntityTypeMapping TypeName="DiplomModel.Category">
               <MappingFragment StoreEntitySet="Category">
-                <ScalarProperty Name="IdCategory" ColumnName="IdCategory" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IdCategory" ColumnName="IdCategory" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="City">
             <EntityTypeMapping TypeName="DiplomModel.City">
               <MappingFragment StoreEntitySet="City">
-                <ScalarProperty Name="IdCity" ColumnName="IdCity" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IdCity" ColumnName="IdCity" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Country">
             <EntityTypeMapping TypeName="DiplomModel.Country">
               <MappingFragment StoreEntitySet="Country">
-                <ScalarProperty Name="IdCountry" ColumnName="IdCountry" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IdCountry" ColumnName="IdCountry" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Delivery">
             <EntityTypeMapping TypeName="DiplomModel.Delivery">
               <MappingFragment StoreEntitySet="Delivery">
-                <ScalarProperty Name="IdDelivery" ColumnName="IdDelivery" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="IdEmployee" ColumnName="IdEmployee" />
-                <ScalarProperty Name="IdProvider" ColumnName="IdProvider" />
                 <ScalarProperty Name="IdProduct" ColumnName="IdProduct" />
+                <ScalarProperty Name="IdProvider" ColumnName="IdProvider" />
+                <ScalarProperty Name="IdEmployee" ColumnName="IdEmployee" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="IdDelivery" ColumnName="IdDelivery" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Employee">
             <EntityTypeMapping TypeName="DiplomModel.Employee">
               <MappingFragment StoreEntitySet="Employee">
-                <ScalarProperty Name="IdEmployee" ColumnName="IdEmployee" />
-                <ScalarProperty Name="SName" ColumnName="SName" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="MName" ColumnName="MName" />
-                <ScalarProperty Name="Login" ColumnName="Login" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="IdGender" ColumnName="IdGender" />
                 <ScalarProperty Name="IdPosition" ColumnName="IdPosition" />
+                <ScalarProperty Name="IdGender" ColumnName="IdGender" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="MName" ColumnName="MName" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="SName" ColumnName="SName" />
+                <ScalarProperty Name="IdEmployee" ColumnName="IdEmployee" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Form">
             <EntityTypeMapping TypeName="DiplomModel.Form">
               <MappingFragment StoreEntitySet="Form">
-                <ScalarProperty Name="IdForm" ColumnName="IdForm" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IdForm" ColumnName="IdForm" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Gender">
             <EntityTypeMapping TypeName="DiplomModel.Gender">
               <MappingFragment StoreEntitySet="Gender">
-                <ScalarProperty Name="IdGender" ColumnName="IdGender" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IdGender" ColumnName="IdGender" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Position">
             <EntityTypeMapping TypeName="DiplomModel.Position">
               <MappingFragment StoreEntitySet="Position">
-                <ScalarProperty Name="IdPosition" ColumnName="IdPosition" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IdPosition" ColumnName="IdPosition" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Product">
             <EntityTypeMapping TypeName="DiplomModel.Product">
               <MappingFragment StoreEntitySet="Product">
-                <ScalarProperty Name="IdProduct" ColumnName="IdProduct" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="Image" ColumnName="Image" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="Information" ColumnName="Information" />
-                <ScalarProperty Name="IdUnit" ColumnName="IdUnit" />
-                <ScalarProperty Name="IdForm" ColumnName="IdForm" />
-                <ScalarProperty Name="IdCountry" ColumnName="IdCountry" />
-                <ScalarProperty Name="IdView" ColumnName="IdView" />
                 <ScalarProperty Name="IdCategory" ColumnName="IdCategory" />
+                <ScalarProperty Name="IdView" ColumnName="IdView" />
+                <ScalarProperty Name="IdCountry" ColumnName="IdCountry" />
+                <ScalarProperty Name="IdForm" ColumnName="IdForm" />
+                <ScalarProperty Name="IdUnit" ColumnName="IdUnit" />
+                <ScalarProperty Name="Information" ColumnName="Information" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Images" ColumnName="Images" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IdProduct" ColumnName="IdProduct" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ProductInDelivery">
             <EntityTypeMapping TypeName="DiplomModel.ProductInDelivery">
               <MappingFragment StoreEntitySet="ProductInDelivery">
-                <ScalarProperty Name="IdProductInDelivery" ColumnName="IdProductInDelivery" />
-                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="IdDelivery" ColumnName="IdDelivery" />
                 <ScalarProperty Name="IdProduct" ColumnName="IdProduct" />
+                <ScalarProperty Name="IdDelivery" ColumnName="IdDelivery" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="IdProductInDelivery" ColumnName="IdProductInDelivery" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ProductInSale">
             <EntityTypeMapping TypeName="DiplomModel.ProductInSale">
               <MappingFragment StoreEntitySet="ProductInSale">
-                <ScalarProperty Name="IdProductInSale" ColumnName="IdProductInSale" />
-                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="IdSale" ColumnName="IdSale" />
                 <ScalarProperty Name="IdProduct" ColumnName="IdProduct" />
+                <ScalarProperty Name="IdSale" ColumnName="IdSale" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="IdProductInSale" ColumnName="IdProductInSale" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Provider">
             <EntityTypeMapping TypeName="DiplomModel.Provider">
               <MappingFragment StoreEntitySet="Provider">
-                <ScalarProperty Name="IdProvider" ColumnName="IdProvider" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Adress" ColumnName="Adress" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="IdCountry" ColumnName="IdCountry" />
                 <ScalarProperty Name="IdCity" ColumnName="IdCity" />
+                <ScalarProperty Name="IdCountry" ColumnName="IdCountry" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Adress" ColumnName="Adress" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IdProvider" ColumnName="IdProvider" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Sale">
             <EntityTypeMapping TypeName="DiplomModel.Sale">
               <MappingFragment StoreEntitySet="Sale">
-                <ScalarProperty Name="IdSale" ColumnName="IdSale" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="IdEmployee" ColumnName="IdEmployee" />
                 <ScalarProperty Name="IdBonusCard" ColumnName="IdBonusCard" />
+                <ScalarProperty Name="IdEmployee" ColumnName="IdEmployee" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="IdSale" ColumnName="IdSale" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Status">
             <EntityTypeMapping TypeName="DiplomModel.Status">
               <MappingFragment StoreEntitySet="Status">
-                <ScalarProperty Name="IdStatus" ColumnName="IdStatus" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IdStatus" ColumnName="IdStatus" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="sysdiagrams">
             <EntityTypeMapping TypeName="DiplomModel.sysdiagrams">
               <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
                 <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Unit">
             <EntityTypeMapping TypeName="DiplomModel.Unit">
               <MappingFragment StoreEntitySet="Unit">
-                <ScalarProperty Name="IdUnit" ColumnName="IdUnit" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IdUnit" ColumnName="IdUnit" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="View">
             <EntityTypeMapping TypeName="DiplomModel.View">
               <MappingFragment StoreEntitySet="View">
-                <ScalarProperty Name="IdView" ColumnName="IdView" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IdView" ColumnName="IdView" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -101,7 +101,7 @@
                                 <Border>
                                     <Image Width="125"
                                            Margin="0 0 7 0"
-                                           Source="{Binding product.Image}">
+                                           Source="{Binding product.Images}">
                                     </Image>
                                 </Border>
 

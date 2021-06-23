@@ -21,7 +21,6 @@ namespace Tea.Page
     /// </summary>
     public partial class ListProduct : Window
     {
-
         public List<Product> productList = new List<Product>();
         List<Product> descriptionProductList = new List<Product>();
 
@@ -125,12 +124,15 @@ namespace Tea.Page
         private void Lv_Product_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             var lv = sender as ListView;
-            var product = lv.SelectedItem as Product;
-
-
-            DescriptionProduct descriptionProduct = new DescriptionProduct(product, this);
-            this.Visibility = Visibility.Hidden;
-            descriptionProduct.ShowDialog();
+            if (lv == null)
+                return;
+            if (lv.SelectedItem != null)
+            {
+                var product = lv.SelectedItem as Product;
+                DescriptionProduct descriptionProduct = new DescriptionProduct(product, this);
+                this.Visibility = Visibility.Hidden;
+                descriptionProduct.ShowDialog();
+            }
 
         }
 
@@ -170,6 +172,38 @@ namespace Tea.Page
         {
             this.Close();
             gWindow.BackToStart();
+        }
+
+        private void BTNClearFilter_Click(object sender, RoutedEventArgs e)
+        {
+            TB_Search_Name.Text = "Поиск по названию";
+            TB_Search_Articul.Text = "Поиск по артикулу";
+            Cb_Sort_Price.SelectedIndex = 0;
+            Cb_Sort_View.SelectedIndex = 0;
+            Filter();
+        }
+
+        private void Btn_Delete_Click(object sender, RoutedEventArgs e)
+        {
+            var button = sender as Button;
+            if (button == null)
+                return;
+            var product = button.DataContext as Product;
+            var _messageBoxAnswer = MessageBox.Show("Вы действительно хотите удалить товар?", "Information", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if(_messageBoxAnswer == MessageBoxResult.Yes)
+            {
+                db.Product.Remove(product);
+                db.SaveChanges();
+                MessageBox.Show("Товар успешно удалён.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+                Filter();
+            }
+        }
+
+        private void Btn_AddProduct_Click(object sender, RoutedEventArgs e)
+        {
+            AddProduct product = new AddProduct();
+            product.ShowDialog(); 
+            Filter();
         }
     }
 }

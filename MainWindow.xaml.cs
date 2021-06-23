@@ -35,15 +35,18 @@ namespace Tea
 
         private void Btn_LogIn_Click(object sender, RoutedEventArgs e)
         {
-            List<Employee> list = db.Employee.Where(i => i.Login.Equals(Tb_Login.Text)).ToList();
-
+            List<Employee> list = db.Employee.Where(i => i.Login != null && i.Password != null).ToList();
+            list = list.Where(i => i.Login.Equals(Tb_Login.Text)).ToList();
             if(list.Count() == 1)
             {
-                var user = db.Employee.Where(i => i.Password.Equals(Tb_Password.Password) && i.Login.Equals(Tb_Login.Text)).FirstOrDefault();
+                list = list.Where(i => i.Password.Equals(Tb_Password.Password)).ToList();
                 if(list.Count() == 1)
                 {
+                    var user = list.FirstOrDefault();
                     FirstPage firstPage = new FirstPage(this, user);
                     this.Visibility = Visibility.Hidden;
+                    Tb_Login.Clear();
+                    Tb_Password.Clear();
                     firstPage.ShowDialog();
                 }
                 else

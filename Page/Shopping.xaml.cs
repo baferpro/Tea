@@ -126,20 +126,20 @@ namespace Tea.Page
                     IdBonusCard = null
                 });
             }
-            for (int i = 0; i < gProductBascet.Count; i++)
+            for (int i = 0; i < gBasketList.Count; i++)
             {
-                int idProduct = gProductBascet[i].IdProduct;
+                int _idProduct = gBasketList[i].product.IdProduct;
                 db.ProductInSale.Add(new ProductInSale
                 {
                     IdSale = sale.IdSale,
-                    IdProduct = idProduct,
-                    Quantity = 1
+                    IdProduct = _idProduct,
+                    Quantity = gBasketList[i].Count
                 });
-                var product = db.Product.Where(g => g.IdProduct == idProduct).FirstOrDefault();
-                product.Quantity -= 1;
+                var product = db.Product.Where(g => g.IdProduct == _idProduct).FirstOrDefault();
+                product.Quantity -= gBasketList[i].Count;
             }
             db.SaveChanges();
-
+            gWindow.productList.Clear();
             MessageBox.Show("Покупка успешно оформлена", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
             this.Close();
             gWindow.Visibility = Visibility.Visible;
@@ -212,11 +212,16 @@ namespace Tea.Page
             if (button == null)
                 return;
             var BasketItem = button.DataContext as Basket;
-            BasketItem.Count++;
-            BasketItem.TotalPrice += BasketItem.product.Price;
-            gProductBascet.Add(BasketItem.product);
-            Lv_Bascet.ItemsSource = gBasketList.ToList();
-            UpdateAll();
+            var product = db.Product.Where(i => i.IdProduct == BasketItem.product.IdProduct).FirstOrDefault();
+            Console.WriteLine(product.Quantity);
+            if (product.Quantity >= BasketItem.Count + 1)
+            {
+                BasketItem.Count++;
+                BasketItem.TotalPrice += BasketItem.product.Price;
+                gProductBascet.Add(BasketItem.product);
+                Lv_Bascet.ItemsSource = gBasketList.ToList();
+                UpdateAll();
+            }
         }
     }
     public class Basket

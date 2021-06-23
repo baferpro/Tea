@@ -24,8 +24,8 @@ namespace Tea.ModelSQL
     
         public int IdProduct { get; set; }
         public string Name { get; set; }
-        public double Quantity { get; set; }
-        public byte[] Image { get; set; }
+        public int Quantity { get; set; }
+        public byte[] Images { get; set; }
         public int Price { get; set; }
         public string Information { get; set; }
         public int IdUnit { get; set; }

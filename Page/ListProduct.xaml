@@ -319,7 +319,7 @@
                     FontSize="30"
                     FontFamily="Harrington"/>
             </StackPanel>
-
+            
             <StackPanel Orientation="Horizontal"
                         Grid.Column="1"
                         HorizontalAlignment="Center">
@@ -338,6 +338,17 @@
                     FontSize="14"
                     Width="170" Height="35" 
                     Background="#FFD3B77F"/>
+
+
+                <Button Grid.ColumnSpan="3"
+                    x:Name="Btn_AddProduct"
+                    Click="Btn_AddProduct_Click"
+                    Content="ДОБАВИТЬ ТОВАР"
+                    FontSize="14"
+                    Width="170" Height="35" 
+                    Background="#FFD3B77F"
+                    HorizontalAlignment="Left"
+                    Margin="20 0 0 0"/>
             </StackPanel>
             
             <StackPanel Orientation="Horizontal"
@@ -351,7 +362,7 @@
                     HorizontalAlignment="Left"
                     VerticalAlignment="Center"/>
             </StackPanel>
-            
+
             <Button
                 x:Name="Btn_Exit"
                 Click="Btn_Exit_Click"
@@ -434,6 +445,12 @@
                     Width="170" Height="35"
                     FontSize="15"
                     Margin="0 0 20 0"/>
+
+                <Button Content="Очистить фильтр"
+                        Background="#FFD3B77F"
+                        Padding="10, 5"
+                        x:Name="BTNClearFilter"
+                        Click="BTNClearFilter_Click"/>
             </StackPanel>
         </Grid>
 
@@ -464,7 +481,8 @@
                                 </Grid.ColumnDefinitions>
 
                                 <Border>
-                                    <Image Width="125"
+                                    <Image Source="{Binding Images}"/>
+                                    <!--<Image Width="125"
                                            Margin="0 0 7 0">
                                         <Image.Source>
                                             <Binding Path="Image">
@@ -473,7 +491,7 @@
                                                 </Binding.TargetNullValue>
                                             </Binding>
                                         </Image.Source>
-                                    </Image>
+                                    </Image>-->
                                 </Border>
 
                                 <StackPanel 
@@ -543,6 +561,24 @@
                                             <Setter Property="CornerRadius" Value="7"/>
                                         </Style>
                                     </Button.Resources>
+                                </Button>
+                                <Button
+                                    x:Name="Btn_Delete"
+                                    Click="Btn_Delete_Click"
+                                    Grid.Column="2"
+                                    Background="White"
+                                    BorderBrush="{x:Null}"
+                                    Width="25" 
+                                    Height="25"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Top"
+                                    Margin="0 20 20 0"
+                                    Padding="0">
+                                    <Button.Content>
+                                        <Image Source="/Image/ExitLogin.png" 
+                                                       Width="20" Height="20"
+                                               Margin="0"/>
+                                    </Button.Content>
                                 </Button>
                             </Grid>
                         </Border>

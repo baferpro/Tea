@@ -37,7 +37,7 @@ namespace Tea.Page
             Tb_Articul.Text = gProduct.IdProduct.ToString();
             Tb_Price.Text = gProduct.Price.ToString();
 
-            using (MemoryStream stream = new MemoryStream(gProduct.Image))
+            using (MemoryStream stream = new MemoryStream(gProduct.Images))
             {
                 BitmapImage bitmapImage = new BitmapImage();
                 bitmapImage.BeginInit();
