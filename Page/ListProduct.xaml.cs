@@ -109,9 +109,9 @@ namespace Tea.Page
             var button = sender as Button;
             if (button == null)
                 return;
-            var product = button.DataContext as Product;
+            var listProduct = button.DataContext as _listProduct;
 
-            productList.Add(product);
+            productList.Add(listProduct._product);
             MessageBox.Show("Товар успешно добавлен в корзину", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
@@ -145,8 +145,8 @@ namespace Tea.Page
                 return;
             if (lv.SelectedItem != null)
             {
-                var product = lv.SelectedItem as Product;
-                DescriptionProduct descriptionProduct = new DescriptionProduct(product, this);
+                var listProduct = lv.SelectedItem as _listProduct;
+                DescriptionProduct descriptionProduct = new DescriptionProduct(listProduct._product, this);
                 this.Visibility = Visibility.Hidden;
                 descriptionProduct.ShowDialog();
             }
@@ -205,14 +205,17 @@ namespace Tea.Page
             var button = sender as Button;
             if (button == null)
                 return;
-            var product = button.DataContext as Product;
-            var _messageBoxAnswer = MessageBox.Show("Вы действительно хотите удалить товар?", "Information", MessageBoxButton.YesNo, MessageBoxImage.Question);
-            if(_messageBoxAnswer == MessageBoxResult.Yes)
+            var listProduct = button.DataContext as _listProduct;
+            if (listProduct != null)
             {
-                db.Product.Remove(product);
-                db.SaveChanges();
-                MessageBox.Show("Товар успешно удалён.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
-                Filter();
+                var _messageBoxAnswer = MessageBox.Show("Вы действительно хотите удалить товар?", "Information", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (_messageBoxAnswer == MessageBoxResult.Yes)
+                {
+                    db.Product.Remove(listProduct._product);
+                    db.SaveChanges();
+                    MessageBox.Show("Товар успешно удалён.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+                    Filter();
+                }
             }
         }
 
