@@ -481,17 +481,7 @@
                                 </Grid.ColumnDefinitions>
 
                                 <Border>
-                                    <Image Source="{Binding Images}"/>
-                                    <!--<Image Width="125"
-                                           Margin="0 0 7 0">
-                                        <Image.Source>
-                                            <Binding Path="Image">
-                                                <Binding.TargetNullValue>
-                                                    <ImageSource>\Image\LogIn.png</ImageSource>
-                                                </Binding.TargetNullValue>
-                                            </Binding>
-                                        </Image.Source>
-                                    </Image>-->
+                                    <Image Source="{Binding _product.Images}"/>
                                 </Border>
 
                                 <StackPanel 
@@ -501,7 +491,7 @@
 
                                     <TextBlock 
                                         x:Name="TB_Name"
-                                        Text="{Binding Name}"
+                                        Text="{Binding _product.Name}"
                                         FontSize="14"/>
 
                                     <TextBlock 
@@ -514,17 +504,17 @@
 
                                     <StackPanel Orientation="Horizontal">
                                         <TextBlock Text="Вид: "/>
-                                        <TextBlock Text="{Binding View.Name}"
+                                        <TextBlock Text="{Binding _product.View.Name}"
                                                FontSize="13"/>
                                     </StackPanel>
 
                                     <StackPanel Orientation="Horizontal">
                                         <TextBlock Text="В наличии: "
                                                    FontSize="13"/>
-                                        <TextBlock Text="{Binding Quantity}"
+                                        <TextBlock Text="{Binding _product.Quantity}"
                                                FontSize="13"/>
                                         <TextBlock Text=" "/>
-                                        <TextBlock Text="{Binding Unit.Name}"
+                                        <TextBlock Text="{Binding _product.Unit.Name}"
                                                FontSize="13"/>
                                     </StackPanel>
 
@@ -532,10 +522,10 @@
                                                 Margin="0 15 0 0">
                                         <TextBlock Text="Артикул "
                                                    FontSize="14"/>
-                                        <TextBlock Text="{Binding IdProduct}"
+                                        <TextBlock Text="{Binding _product.IdProduct}"
                                                FontSize="14"/>
                                         <TextBlock Text="                                                   "/>
-                                        <TextBlock Text="{Binding Price}"  
+                                        <TextBlock Text="{Binding _product.Price}"  
                                                FontSize="14"/>
                                         <TextBlock Text=" Р"  
                                                FontSize="14"/>
@@ -565,6 +555,7 @@
                                 <Button
                                     x:Name="Btn_Delete"
                                     Click="Btn_Delete_Click"
+                                    Visibility="{Binding _btnVisible}"
                                     Grid.Column="2"
                                     Background="White"
                                     BorderBrush="{x:Null}"

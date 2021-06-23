@@ -32,7 +32,8 @@ namespace Tea.Page
             gWindow = lWindow;
             InitializeComponent();
 
-            Lv_Product.ItemsSource = db.Product.ToList();
+            if (gUser.Position.IdPosition != 7)
+                Btn_AddProduct.Visibility = Visibility.Collapsed;
 
             List<View> views = db.View.ToList();
             Cb_Sort_View.ItemsSource = views;
@@ -41,6 +42,8 @@ namespace Tea.Page
             Cb_Sort_View.SelectedIndex = 0;
 
             Btn_List_Product.IsEnabled = false;
+
+            Filter();
         }
 
         private void Btn_Exit_Click(object sender, RoutedEventArgs e)
@@ -50,41 +53,55 @@ namespace Tea.Page
 
         public void Filter()
         {
+            List<_listProduct> list = new List<_listProduct>();
             var allProduct = db.Product.ToList();
+            foreach (var item in allProduct)
+            {
+                Visibility visibility;
+                if (gUser.Position.IdPosition != 7)
+                    visibility = Visibility.Collapsed;
+                else
+                    visibility = Visibility.Visible;
+                list.Add(new _listProduct
+                {
+                    _product = item,
+                    _btnVisible = visibility
+                });
+            }
 
             if (TB_Search_Articul.Text.Length > 0 && TB_Search_Articul.Text.ToLower().Equals("Поиск по артикулу".ToLower()) == false)
             {
-                allProduct = allProduct.Where(i => i.IdProduct.ToString().ToLower().Contains(TB_Search_Articul.Text.ToLower())).ToList();
+                list = list.Where(i => i._product.IdProduct.ToString().ToLower().Contains(TB_Search_Articul.Text.ToLower())).ToList();
             }
             if (TB_Search_Name.Text.Length > 0 && TB_Search_Name.Text.ToLower().Equals("Поиск по названию".ToLower()) == false)
             {
-                allProduct = allProduct.Where(i => i.Name.ToLower().Contains(TB_Search_Name.Text.ToLower())).ToList();
+                list = list.Where(i => i._product.Name.ToLower().Contains(TB_Search_Name.Text.ToLower())).ToList();
             }
             if (Cb_Sort_Price.SelectedIndex != 0)
             {
                 if (Cb_Sort_Price.SelectedIndex == 1)
                 {
-                    allProduct = allProduct.OrderBy(i => i.Price).ToList();
+                    list = list.OrderBy(i => i._product.Price).ToList();
                 }
                 else
                 {
-                    allProduct = allProduct.OrderByDescending(i => i.Price).ToList();
+                    list = list.OrderByDescending(i => i._product.Price).ToList();
                 }
             }
             if (Cb_Sort_View.SelectedIndex != 0)
             {
                 if (Cb_Sort_View.SelectedIndex == 0)
                 {
-                    Lv_Product.ItemsSource = allProduct;
+                    Lv_Product.ItemsSource = list;
                 }
                 else
                 {
                     var View = Cb_Sort_View.SelectedItem as View;
-                    allProduct = allProduct.Where(i => i.IdView == View.IdView).ToList();
+                    list = list.Where(i => i._product.IdView == View.IdView).ToList();
                 }
             }
 
-            Lv_Product.ItemsSource = allProduct;
+            Lv_Product.ItemsSource = list;
         }
 
         private void Btn_Exit_Click_1(object sender, RoutedEventArgs e)
@@ -204,6 +221,12 @@ namespace Tea.Page
             AddProduct product = new AddProduct();
             product.ShowDialog(); 
             Filter();
+        }
+
+        class _listProduct
+        {
+            public Product _product { get; set; }
+            public Visibility _btnVisible { get; set; }
         }
     }
 }
